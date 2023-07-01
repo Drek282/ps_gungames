@@ -17,7 +17,7 @@
  *	You should have received a copy of the GNU General Public License
  *	along with PsychoStats.  If not, see <http://www.gnu.org/licenses/>.
  *
- *	$Id: jquery.psycholive.js 566 2008-10-14 15:09:38Z lifo $
+ *	$Id: jquery.psycholive.js 000 2023-07-01 $
  *
  *	PsychoStats (PsychoLive) jQuery plugin. For use with PsychoStats.
  */
@@ -563,8 +563,8 @@
 			var params;
 			if (typeof obj != 'object') return obj;
 			if (!nodefaults) {
-				if (!obj.gametype) obj.gametype = 'halflife';
-				if (!obj.modtype) obj.modtype = 'gungame';
+				if (!obj.gametype) obj.gametype = 'source';
+				if (!obj.modtype) obj.modtype = 'gungames';
 				if (!obj.map) obj.map = 'unknown';
 			}
 			params = [ 'code', 'start_time', 'end_time', 'max_idx',
@@ -1283,7 +1283,7 @@
 				// team is already a string, so return it
 				return team.toUpperCase();
 			}
-			if (this.game.gametype == 'halflife') {
+			if (this.game.gametype == 'source') {
 				if (t == 1) {
 					name = 'SPECTATOR';
 				} else if (this.game.modtype == 'cstrike') {
@@ -2263,9 +2263,9 @@
 
 	// returns an array of the teams for the current game
 	function team_names(gametype, modtype) {
-		if (gametype == 'halflife') {
+		if (gametype == 'source') {
 			switch (modtype) {
-				case 'gungame': return [ 'TERRORIST', 'CT' ];
+				case 'gungames': return [ 'TERRORIST', 'CT' ];
 			}
 		}
 		return [ 'TEAM1', 'TEAM2'] ;

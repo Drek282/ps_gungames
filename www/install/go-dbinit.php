@@ -34,15 +34,15 @@ $validfields = array('gametype','modtype','overwrite','dropdb');
 $cms->theme->assign_request_vars($validfields, true);
 
 $gametypes = array(
-	'halflife'	=> "Half-Life"
+	'source'	=> "Half-Life 2"
 );
 
 $modtypes = array(
-	'gungame'	=> "Gun Game"
+	'gungames'	=> "Gun Game: Source"
 );
 
 $gamesupport = array(
-	'halflife'	=> array( 'gungame' )
+	'source'	=> array( 'gungames' )
 );
 
 // make DB connection
@@ -90,7 +90,7 @@ foreach ($list as $k) {
 		$gametype[] = $k;
 	}
 }
-//if (!$gametype) $gametype[] = 'halflife';
+//if (!$gametype) $gametype[] = 'source';
 
 // validate modtype's selected
 $list = is_array($modtype) ? $modtype : array();
@@ -100,7 +100,7 @@ foreach ($list as $k) {
 		$modtype[] = $k;
 	}
 }
-//if (!$modtype) $modtype[] = 'gungame';
+//if (!$modtype) $modtype[] = 'cstrike';
 
 
 $cms->theme->assign(array(
@@ -129,9 +129,9 @@ function do_init($games, $mods) {
 	if (!$games) {
 		$errors[] = "No 'game type' selected! You must select at least one.";
 	}
-	// a 'mod' must be selected if 'halflife' is selected as a game type.
+	// a 'mod' must be selected if 'source' is selected as a game type.
 	// the other games supported at this time do not have mods.
-	if (!$mods and in_array('halflife',$games)) {
+	if (!$mods and in_array('source',$games)) {
 		$errors[] = "No 'mod type' selected! You must select at least one.";
 	}
 	if ($errors) return false;
