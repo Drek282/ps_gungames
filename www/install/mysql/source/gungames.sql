@@ -172,4 +172,4 @@ INSERT INTO `ps_config_awards` (`id`, `enabled`, `idx`, `type`, `negative`, `cla
         
 INSERT INTO `ps_config` (`id`, `conftype`, `section`, `var`, `value`, `label`, `type`, `locked`, `verifycodes`, `options`, `help`) 
     VALUES 
-        (1,'main',NULL,'meta_keywords','PsychoStats Game Server Player Statistics Counter-Strike Gun Game Valve','Site HTML Meta Key Words','text',0,'','','These are the HTML meta key words for your PsychoStats.  They are used by search engines to provide search results.');
+        (1,'main',NULL,'meta_keywords','PsychoStats Game Server Player Statistics Counter-Strike Gun Game Source Valve','Site HTML Meta Key Words','text',0,'','','These are the HTML meta key words for your PsychoStats.  They are used by search engines to provide search results.');
