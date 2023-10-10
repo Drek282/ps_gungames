@@ -44,11 +44,17 @@ function __construct(&$db) {
 	// add gungames specific variables to the list
 	$this->CLAN_MODTYPES += array(
 		'lvlsgained'		=> '+',
-		'lvlslost'		=> '+',
-		'lvlsstolen'		=> '+',
-		'lvlsgiven'		=> '+',
+		'lvlslost'			=> '+',
+		'lvlsgiven'			=> '+',
+		'knifelvlsgained'	=> '+',
+		'knifelvlslost'		=> '+',
+		'knifelvlsgiven'	=> '+',
+		'leader'			=> '+',
+		'knifesteal'		=> '+',
+		'triplelevel'		=> '+',
+		'lastlevel'			=> '+',
 		'winsgained'		=> '+',
-		'winsgiven'		=> '+',
+		'winsgiven'			=> '+',
 		'killsperlvl'		=> array( 'ratio', 'kills', 'lvlsgained' ),
 		'killsperwin'		=> array( 'ratio', 'kills', 'winsgained' ),
 		'lvlsperwin'		=> array( 'ratio', 'lvlsgained', 'winsgained' ),
@@ -109,19 +115,21 @@ function player_left_column_mod(&$plr, &$theme) {
 		}
 		
 		// remove actions that are not relevant to GG
-		//unset($actions['bombexploded'], $actions['bombdefused'],$actions['rescuedhostages'],...);
+		unset($actions['won'],$actions['bombexploded'], $actions['bombdefused'],$actions['rescuedhostages']);
 		
-		$actions['winsgained'] = array(
-			'label'	=> $cms->trans("Wins Gained"),
-			'type'	=> 'pct_bar',
-			'value'	=> array(
-				'pct'	 	=> $plr['winsgainedpct'],
-				'title'		=> $plr['winsgained'] . ' ' . $cms->trans('wins gained') . ' (' . $plr['winsgainedpct'] . '%)',
-				'color1'	=> 'cc0000',
-				'color2'	=> '00cc00',
-				'width'		=> 130
-			)
-		);
+		if (isset($plr['winsgainedpct'])) {
+			$actions['winsgained'] = array(
+				'label'	=> $cms->trans("Wins Gained"),
+				'type'	=> 'pct_bar',
+				'value'	=> array(
+					'pct'	 	=> $plr['winsgainedpct'],
+					'title'		=> $plr['winsgained'] . ' ' . $cms->trans('wins gained') . ' (' . $plr['winsgainedpct'] . '%)',
+					'color1'	=> 'cc0000',
+					'color2'	=> '00cc00',
+					'width'		=> 130
+				)
+			);
+		}
 
 		$cms->filter('left_column_actions', $actions);
 		foreach (array_keys($actions) as $i) {

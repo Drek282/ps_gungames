@@ -95,25 +95,52 @@ sub event_plrtrigger {
 			$p1->{mod_maps}{ $m->{mapid} }{lvlslost}++;
 			$p1->{mod}{lvlslost}++;
 			$m->{mod}{lvlslost}++;
-	
-		} elsif ($trigger eq 'gg_levelsteal') {
-			# levelsteal is triggered by the theif
-			$p1->{mod_maps}{ $m->{mapid} }{lvlsstolen}++;
-			$p1->{mod}{lvlsstolen}++;
-			$m->{mod}{lvlsstolen}++;
-			# Don't need to do much with last victim it will be
-			# taken care of the by the gg_leveldown event
+
+		} elsif ($trigger eq 'gg_knife_level') {
+			# levelup is triggered on a normal kill to gain a level	
+			$p1->{mod_maps}{ $m->{mapid} }{knifelvlsgained}++;
+			$p1->{mod}{knifelvlsgained}++;
+			$m->{mod}{knifelvlsgained}++;
 			my $p2 = $p1->{gg_last_victim};
 			if ($p2) {
-				# remove bonus points for being a victim of a steal
-				$self->plrbonus($trigger, 'victim', $p2);
+				# If a victim was saved the gg_last_victim var
+				# won't point to a valid record anymore.
 				my $w = $p1->{gg_last_weapon};
-				$p1->{mod_victims}{ $p2->{plrid} }{lvlsstolen}++;
-				$p2->{mod_victims}{ $p1->{plrid} }{lvlslost}++;
+				if ($w) {
+					$p1->{mod_weapons}{ $w->{weaponid} }{knifelvlsgained}++;
+					$p2->{mod_weapons}{ $w->{weaponid} }{knifelvlsgiven}++;
+				}
+				$p2->{mod_maps}{ $m->{mapid} }{knifelvlsgiven}++;
+				$p2->{mod}{knifelvlsgiven}++;
+				$p1->{mod_victims}{ $p2->{plrid} }{knifelvlsgained}++;
+				$p2->{mod_victims}{ $p1->{plrid} }{knifelvlsgiven}++;
 				# calculate skill
 				$self->calcskill_kill_func($p1, $p2, $w);
-				# don't care about the weapon, it's always a knife			
 			}
+	
+		} elsif ($trigger eq 'gg_leader') {
+			# bonus points are given by the standard event capture
+			$p1->{mod_maps}{ $m->{mapid} }{leader}++;
+			$p1->{mod}{leader}++;
+			$m->{mod}{leader}++;
+	
+		} elsif ($trigger eq 'gg_triple_level') {
+			# bonus points are given by the standard event capture
+			$p1->{mod_maps}{ $m->{mapid} }{triplelevel}++;
+			$p1->{mod}{tiplelevel}++;
+			$m->{mod}{triplelevel}++;
+	
+		} elsif ($trigger eq 'gg_last_level') {
+			# bonus points are given by the standard event capture
+			$p1->{mod_maps}{ $m->{mapid} }{lastlevel}++;
+			$p1->{mod}{lastlevel}++;
+			$m->{mod}{lastlevel}++;
+	
+		} elsif ($trigger eq 'gg_knife_steal') {
+			# bonus points are given by the standard event capture
+			$p1->{mod_maps}{ $m->{mapid} }{knifesteal}++;
+			$p1->{mod}{knifesteal}++;
+			$m->{mod}{knifesteal}++;
 	
 		} elsif ($trigger eq 'gg_win') {
 			# keep stats for wins
@@ -128,13 +155,25 @@ sub event_plrtrigger {
 				$p1->{mod_victims}{ $p2->{plrid} }{winsgained}++;
 				$p2->{mod_victims}{ $p1->{plrid} }{winsgiven}++;
 			}
+		
+		# ignore the following triggers for now
+		} elsif ($trigger eq 'headshot') {
+		} elsif ($trigger eq 'gg_lose') {
+		} elsif ($trigger eq 'gg_team_win') {
+		} elsif ($trigger eq 'gg_team_lose') {
 			
 		} else {
 			if ($self->{report_unknown}) {
 				$self->warn("Unknown GUNGAME player trigger '$trigger' from src $self->{_src} line $self->{_line}: $self->{_event}");
 			}
 		}
-		
+	
+	# ignore the following triggers for now
+	} elsif ($trigger eq 'clantag') {
+	} elsif ($trigger eq 'headshot') {
+	} elsif ($trigger eq 'domination') {
+	} elsif ($trigger eq 'revenge') {
+
 	} else {
 		# capture all other events not related directly to gungame
 		$self->SUPER::event_plrtrigger($timestamp, $args);

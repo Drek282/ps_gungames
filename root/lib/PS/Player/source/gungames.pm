@@ -25,14 +25,19 @@ use strict;
 use warnings;
 use base qw( PS::Player::source::cstrikes );
 
-our $VERSION = '1.00.' . (('$Rev: 514 $' =~ /(\d+)/)[0] || '000');
+our $VERSION = '1.00.' . (('$Rev: 000 $' =~ /(\d+)/)[0] || '000');
 
 our $TYPES = {
 	%$PS::Player::source::cstrikes::TYPES, 
 	lvlsgained		=> '+',
-	lvlslost		=> '+',
-	lvlsstolen		=> '+',
 	lvlsgiven		=> '+',
+	lvlslost		=> '+',
+	knifelvlsgained => '+',
+	knifelvlsgiven	=> '+',
+	knifesteal		=> '+',
+	leader			=> '+',
+	triplelevel		=> '+',
+	lastlevel		=> '+',
 	winsgained		=> '+',
 	winsgiven		=> '+',
 	killsperlvl		=> [ ratio => qw( kills lvlsgained ) ],

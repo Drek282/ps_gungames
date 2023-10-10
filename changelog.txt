@@ -4,3 +4,4 @@
 Version 3.2.8n (in progress)
 * [Added] Initial commit.
 * [Changed] Version string to indicate "nightly" status of current working version.
+* [Improved] Gun Game: Source support fully implemented.

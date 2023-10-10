@@ -30,11 +30,16 @@ our $VERSION = '1.00.' . (('$Rev: 000 $' =~ /(\d+)/)[0] || '000');
 our $TYPES = {
 	%$PS::Map::source::cstrikes::TYPES,
 	lvlsgained		=> '+',
-	lvlsstolen		=> '+',
+	lvlsgiven		=> '+',
 	lvlslost		=> '+',
+	knifelvlsgained => '+',
+	knifelvlsgiven	=> '+',
+	knifesteal		=> '+',
+	leader			=> '+',
+	triplelevel		=> '+',
+	lastlevel		=> '+',
 	winsgained		=> '+',
 };
-
 
 # override parent methods to combine types
 sub get_types { return { %{$_[0]->SUPER::get_types}, %$TYPES } }
