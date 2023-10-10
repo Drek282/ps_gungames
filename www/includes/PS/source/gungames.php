@@ -47,7 +47,6 @@ function __construct(&$db) {
 		'lvlslost'			=> '+',
 		'lvlsgiven'			=> '+',
 		'knifelvlsgained'	=> '+',
-		'knifelvlslost'		=> '+',
 		'knifelvlsgiven'	=> '+',
 		'leader'			=> '+',
 		'knifesteal'		=> '+',
