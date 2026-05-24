@@ -8,3 +8,4 @@ Version 3.2.8n (in progress)
 * [Fixed] Replaced incorrect version of jquery.psycholive.js.
 * [Improved] The CC theme is now a child theme.
 * [Added] Mod logo.
+* [Improved] [Chore] Make pod2html happy.
